@@ -21,11 +21,30 @@ public class StudentService {
 
     public boolean createStudent(StudentEntity studentEntity) {
         if(studentEntity != null){
+            studentEntity.setId((int) nextId++);
             student.add(studentEntity);
             return true;
         }else {
             return false;
         }
+    }
 
+    public StudentEntity getStudentById(int id) {
+        for (StudentEntity studentEntity : student) {
+            if (studentEntity.getId() == id) {
+                return studentEntity;
+            }
+        }
+        return null;
+    }
+
+    public String deleteStudent(int id) {
+        for (StudentEntity studentEntity : student) {
+            if (studentEntity.getId() == id) {
+                student.remove(studentEntity);
+                return "Student deleted successfully";
+            }
+        }
+        return "Student not found";
     }
 }
